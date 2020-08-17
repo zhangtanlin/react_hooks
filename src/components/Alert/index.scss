@@ -1,0 +1,53 @@
+/* 轻提示 */
+.toastBox {
+  width: 100%;
+  font-size: 14px;
+  position: absolute;
+  top: -3rem;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  transition: top .4s;
+  &.show {
+    top: .5rem;
+  }
+  &.hide {
+    top: -3rem;
+  }
+  .toast {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &.danger {
+      box-shadow: 0px 0px 5px #ff0000;
+      -moz-box-shadow: 0px 0px 5px #ff0000;
+      -webkit-box-shadow: 0px 0px 5px #ff0000;
+    }
+    &.info {
+      border: 1px solid yellow;
+      box-shadow: 0px 0px 5px yellow;
+      -moz-box-shadow: 0px 0px 5px yellow;
+      -webkit-box-shadow: 0px 0px 5px yellow;
+    }
+    &.success {
+      border: 1px solid green;
+      box-shadow: 0px 0px 5px green;
+      -moz-box-shadow: 0px 0px 5px green;
+      -webkit-box-shadow: 0px 0px 5px green;
+    }
+    .message {
+      margin-right: 10px;
+    }
+    .btn {
+      color: #cecece;
+      cursor: pointer;
+      &:hover {
+        color: #858585;
+      }
+    }
+  }
+}
