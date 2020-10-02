@@ -10,11 +10,18 @@ import * as serviceWorker from './serviceWorker';
  * @requires store    redux 商店
  */
 import store from './redux/store';
+/**
+ * 全局引入graph
+ */
+import { ApolloProvider } from '@apollo/client';
+import gqlClient from './utils/gqlClient'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ApolloProvider client={gqlClient}>
+        <App />
+      </ApolloProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

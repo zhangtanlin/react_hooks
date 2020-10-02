@@ -41,9 +41,11 @@ function SignIn() {
     console.log('values', values);
     const signInByPhone = await ApiSignInByPhone(values);
     console.log('signInByPhone', signInByPhone);
-    // if () {
-    // }
-    // history.push('/home');
+    if (signInByPhone) {
+      history.push('/home');
+    } else {
+      console.log('账号登录失败');
+    }
   };
   /**
    * 获取随机数
@@ -56,6 +58,12 @@ function SignIn() {
       type: 'SET_RANDOMNUM',
       payload: newRandomNum,
     });
+  };
+  /**
+   * 跳转posys页面
+   */
+  const toPosts = () => {
+    history.push('/posts');
   };
   // 返回
   return (
@@ -86,6 +94,7 @@ function SignIn() {
       </div>
       <button type="button" onClick={loginByPassword}>登陆,跳转首页</button>
       <button type="button" onClick={getRandom}>获取随机数</button>
+      <button type="button" onClick={toPosts}>跳转posts</button>
       <p>{JSON.stringify(randomNum)}</p>
     </div>
   );

@@ -13,6 +13,7 @@ import routes from './constants/routes';
 import Sign from './pages/Sign';
 import Home from './pages/Home';
 import Upload from './pages/Upload';
+import Posts from './pages/Posts';
 import Toast from './components/Toast';
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
       <Switch>
         <Route exact path={routes.sign} component={Sign} />
         <Route path={routes.home} component={Home} />
-        <Route path={routes.upload} component={Upload} />
+        <Route exact path={routes.upload} component={Upload} />
+        <Route path={routes.posts} component={Posts} />
       </Switch>
       <Toast />
     </Router>

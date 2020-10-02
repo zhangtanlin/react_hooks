@@ -6,11 +6,11 @@ import { GetUrlQuery } from '../../utils/tools';
  * @link 参考文档 http://mockjs.com/examples.html
  */
 export const getArray = Mock.mock(RegExp('/getArray.*'), 'post', (options: any) => {
-  let pageSize = 5; 
-  let currentPage = 1; 
+  let pageSize = 5;
+  let currentPage = 1;
   try {
     const tempBody = JSON.parse(options.body);
-    pageSize = Number(tempBody.pageSize); 
+    pageSize = Number(tempBody.pageSize);
     currentPage = Number(tempBody.currentPage);
   } catch (error) {
   } finally {
