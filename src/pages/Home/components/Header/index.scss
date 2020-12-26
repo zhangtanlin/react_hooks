@@ -1,0 +1,100 @@
+.home {
+  font-size: 0.5vmin;
+  /* 头部 */
+  .header {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .list {
+      flex: 1;
+      position: relative;
+      .calendarInput {
+        width: 100px;
+        height: 30px;
+        border: 1px solid #cecece;
+      }
+    }
+  }
+  /* 内容区 */
+  .content {
+    /* 列表 */
+    .listBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        background-color: #f1f1f1;
+      }
+      .item {
+        flex: 1;
+        text-align: center;
+      }
+    }
+  }
+  /* 分页 */
+  .paginateBox {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .paginateLeft {
+      display: flex;
+      align-items: center;
+      .paginateLeftText {
+        margin-right: 10px;
+      }
+    }
+    input {
+      height: 36px;
+      width: 36px;
+      font-size: 14px;
+      margin: 0 5px;
+      color: rgb(253, 89, 92);
+      border: 1px solid rgb(253, 89, 92);
+      border-radius: 5px;
+      text-align: center;
+    }
+    button {
+      height: 36px;
+      width: 50px;
+      font-size: 14px;
+      margin-left: 5px;
+      color: #fff;
+      background: rgb(253, 89, 92);
+      border: none;
+      border-radius: 36px;
+      cursor: pointer;
+      &:hover {
+        background: rgb(240, 30, 30);
+      }
+    }
+    .paginate {
+      font-size: 14px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      a {
+        cursor: pointer;
+        border-radius: 5px;
+        width: 40px;
+        height: 40px;
+        color: rgb(82, 90, 102);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          color: rgb(253, 89, 92);
+        }
+      }
+      .paginateActive a {
+        color: rgb(253, 89, 92);
+        background-color: rgb(248, 248, 248);
+      }
+      .paginateNext a {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
