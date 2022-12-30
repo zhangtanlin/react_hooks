@@ -4,6 +4,7 @@
  * @requires cryptoCipheriv 使用 crypto 的 createCipheriv 加密方法
  * @requires encrypt_key 加密 key
  */
+import { randomBytes } from 'crypto'
 import { cryptoCipheriv } from './crypto';
 const encryptKey = '132f1537f85scxpcm59f7e318b9epa51';
 
@@ -106,30 +107,13 @@ export const minutesFormat = (minutes: number) => {
  */
 export const encryptionParam = (data: any) => {
   const newData: string = JSON.stringify(data);
-  const key = new Buffer(encryptKey);
-  const iv = randomString(16, encryptKey);
+  const key = Buffer.from(encryptKey);
+  const iv = randomBytes(16);
   const cipheriv = cryptoCipheriv('aes-256-cfb', key, iv, newData);
-  const encrypted = iv.toString() + cipheriv;
+  const encrypted = iv.toString('hex') + cipheriv;
   const unixTime = parseInt((new Date().getTime() / 1000).toString());
   console.log('cipheriv', cipheriv);
   console.log('encrypted', encrypted);
   console.log('unixTime', unixTime);
   return '';
-}
-
-/**
- * 获取指定长度的随机字符串
- * @param length 生成的数据长度
- * @param chars 随机字符串
- * @returns 
- */
-export const randomString = (
-  length: number,
-  chars: string,
-) => {
-  var result = '';
-  for (var i = length; i > 0; --i) {
-    result += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return result;
 }

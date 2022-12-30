@@ -1,18 +1,15 @@
-# Getting Started with Create React App
+# 开始创建 React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+这个项目是用[Create React App](https://github.com/facebook/create-react-app)创建的.
 
 ## Available Scripts
 
-In the project directory, you can run:
+在项目根目录,可以运行:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+开发模式下应用在浏览器的打开地址[http://localhost:3000](http://localhost:3000) to view it in the browser.<br/>
+编辑之后页面重载,可以看到一下错误的格式和打印.
 
 ### `npm test`
 
@@ -38,6 +35,11 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
   create-react-app my-app --template typescript
 ```
 
+### 注意
+- 因为项目里面的加解密使用了nodejs的一些方法,所以一定要引入nodejs:
+```bash
+  npm i --save-dev @types/node
+```
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
@@ -48,6 +50,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+创建应用文档[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+react开发文档[React documentation](https://reactjs.org/).
