@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 /**
  * 引入路由配置文件及相关组件
  * @requires routes   路由配置文件
@@ -18,15 +18,15 @@ import Toast from './components/Toast';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path={routes.sign} component={Sign} />
-        <Route path={routes.home} component={Home} />
-        <Route exact path={routes.upload} component={Upload} />
-        <Route path={routes.posts} component={Posts} />
-      </Switch>
+    <BrowserRouter>
+      <Routes>
+        <Route path={routes.sign} element={<Sign />} />
+        <Route path={routes.home} element={<Home />} />
+        <Route path={routes.upload} element={<Upload />} />
+        <Route path={routes.posts} element={<Posts />} />
+      </Routes>
       <Toast />
-    </Router>
+    </BrowserRouter>
   );
 }
 

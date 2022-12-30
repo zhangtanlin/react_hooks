@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './index.scss';
 import ReactPaginate from 'react-paginate';
 import Select from '../../components/Select'
@@ -37,7 +37,7 @@ function Home() {
    * @param detailVisible 弹出框-是否显示
    * @param detailInfo    弹出框-详情
    */
-  const history = useHistory();
+  const navigate = useNavigate();
   const [pageSizes] = useState([
     { label: '5条每/页', value: 5 },
     { label: '10条每/页', value: 10 },
@@ -131,11 +131,11 @@ function Home() {
   }
   // 跳转登陆
   const toSign = () => {
-    history.push('/');
+    navigate('/');
   }
   // 跳转上传
   const toUpload = () => {
-    history.push('/upload');
+    navigate('/upload');
   }
   // 返回
   return (
@@ -225,7 +225,7 @@ function Home() {
         visible={detailVisible}
         onChange={() => showPopup()}
       >
-        {content}
+        {content()}
       </Popup>
     </>
 

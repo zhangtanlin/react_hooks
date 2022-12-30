@@ -23,7 +23,7 @@ function Home() {
    * @param data    列表
    * @param list    graphql获取列表写法二
    */
-  const { loading, error, data } = useQuery(GET_POSTERS);
+  const { data } = useQuery(GET_POSTERS);
   const [list, setList] = useState([]);
   /**
    * 操作数据

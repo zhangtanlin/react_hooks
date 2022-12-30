@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './index.scss';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 /**
@@ -19,13 +19,13 @@ interface randomNumInterface {
 function SignIn() {
   /**
    * 定义
-   * @param history 路由
+   * @param navigate 路由
    * @function randomNumReducer redux 使用 state 获取 randomNumReducer 的值
    * @function randomNum        redux 获取 randomNumReducer 的值
    * @function dispatch         redux 设置 randomNumReducer 的值
    * @param {object} values 登陆参数
    */
-  const history = useHistory();
+  const navigate = useNavigate();
   const randomNumReducer = (state: randomNumInterface) => state.randomNumReducer;
   const randomNum = useSelector(randomNumReducer);
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function SignIn() {
     const signInByPhone = await ApiSignInByPhone(values);
     console.log('signInByPhone', signInByPhone);
     if (signInByPhone) {
-      history.push('/home');
+      navigate('/home');
     } else {
       console.log('账号登录失败');
     }
@@ -63,7 +63,7 @@ function SignIn() {
    * 跳转posys页面
    */
   const toPosts = () => {
-    history.push('/posts');
+    navigate('/posts');
   };
   // 返回
   return (
