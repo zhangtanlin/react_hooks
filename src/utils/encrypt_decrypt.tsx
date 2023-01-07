@@ -85,7 +85,6 @@ export const cryptoAesEncrypt = ( str: string ): string => {
     encryptStr = encrypted.ciphertext.toString().toUpperCase();
   } catch (error) {
     encryptStr = '';
-    console.log('加密方法error', error);
   }
   return encryptStr;
 }
@@ -118,7 +117,6 @@ export const cryptoAesDecrypt = (str: string,): string => {
     ).toString();
   } catch (error) {
     decryptStr = '';
-    console.log('解密方法error', error);
   }
   return decryptStr;
 }
