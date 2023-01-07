@@ -1,12 +1,9 @@
 /**
  * 导入
- * @requires randomBytes    获取随机字节数
  * @requires cryptoCipheriv 使用 crypto 的 createCipheriv 加密方法
  * @requires encrypt_key 加密 key
  */
-import { randomBytes } from 'crypto'
-import { cryptoCipheriv } from './crypto';
-const encryptKey = '132f1537f85scxpcm59f7e318b9epa51';
+import { cryptoAesEncrypt, cryptoAesDecrypt } from './encrypt_decrypt';
 
 /**
  * 根据 url 地址，获取地址栏指定参数的值
@@ -106,14 +103,12 @@ export const minutesFormat = (minutes: number) => {
  * @param unixTime  获取当前时间的时间戳（秒）
  */
 export const encryptionParam = (data: any) => {
-  const newData: string = JSON.stringify(data);
-  const key = Buffer.from(encryptKey);
-  const iv = randomBytes(16);
-  const cipheriv = cryptoCipheriv('aes-256-cfb', key, iv, newData);
-  const encrypted = iv.toString('hex') + cipheriv;
-  const unixTime = parseInt((new Date().getTime() / 1000).toString());
-  console.log('cipheriv', cipheriv);
-  console.log('encrypted', encrypted);
-  console.log('unixTime', unixTime);
+  const tempData: string = JSON.stringify(data);
+  console.log('加密之前', tempData);
+  const encrypt = cryptoAesEncrypt(tempData);
+  console.log('加密之后', encrypt);
+  console.log('解密之前', );
+  const decrypt = cryptoAesDecrypt(encrypt);
+  console.log('解密之后', decrypt);
   return '';
 }
