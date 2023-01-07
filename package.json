@@ -18,6 +18,7 @@
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.2.2",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.1.1",
     "dplayer": "^1.27.0",
     "graphql": "^16.6.0",
@@ -35,7 +36,7 @@
   },
   "scripts": {
     "注意": "这里的参数--openssl-legacy-provider是为了解决nodejs版本太高对openssl的不兼容(后期可以去掉)",
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "cross-env PORT=4000 react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

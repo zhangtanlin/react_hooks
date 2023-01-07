@@ -1,26 +1,28 @@
 # 开始创建 React App
 这个项目是用[Create React App](https://github.com/facebook/create-react-app)创建的.
 ```bash
+# 先要安装react脚手架
+npm i -g create-react-app
 # 创建当前项目使用的命令是:
 create-react-app react_hooks --template typescript redux-typescript
+# 更改端口号第一步安装cross-env:
+npm install cross-env
+# 更改端口号第二步在packages的start命令内添加: 
+cross-env PORT=4000
 ```
 
 ## Available Scripts
-
 在项目根目录,可以运行:
 
 ### `npm start`
-
 开发模式下应用在浏览器的打开地址[http://localhost:3000](http://localhost:3000) to view it in the browser.<br/>
 编辑之后页面重载,可以看到一下错误的格式和打印.
 
 ### `npm test`
-
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
-
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -30,13 +32,6 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
-
-### 创建app使用
-```bash
-  # 先要安装react脚手架
-  # npm i -g create-react-app
-  create-react-app my-app --template typescript
-```
 
 ### 注意
 - 因为项目里面的加解密使用了nodejs的一些方法,所以一定要引入nodejs:
