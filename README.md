@@ -1,6 +1,9 @@
 # 开始创建 React App
-
 这个项目是用[Create React App](https://github.com/facebook/create-react-app)创建的.
+```bash
+# 创建当前项目使用的命令是:
+create-react-app react_hooks --template typescript redux-typescript
+```
 
 ## Available Scripts
 
