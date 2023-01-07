@@ -29,8 +29,11 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+/**
+ * 测量应用程序性能
+ * 和(src/reportWebVitals.ts)文件配合使用.
+ * 如果想开始测量应用程序性能,请传递一个函数用来记录结果,
+ * 例如:reportWebVitals(console.log),或者发送一个到分析端点,
+ * 查看更多请参考文档(https://bit.ly/CRA-vitals)
+ */
 reportWebVitals();
