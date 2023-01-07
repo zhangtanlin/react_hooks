@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
@@ -29,6 +30,15 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
+
+/**
+ * 如果你想让你的应用程序离线工作并加载得更快,
+ * 你可以改变下面的 unregister() 为 register().
+ * 请注意,这会带来一些陷阱.
+ * 学习更多相关服务提供者:(https://cra.link/PWA).
+ */
+serviceWorkerRegistration.register();
+
 /**
  * 测量应用程序性能
  * 和(src/reportWebVitals.ts)文件配合使用.
