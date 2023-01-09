@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './index.scss';
-import { setVideoImg, minutesFormat } from '../../utils/tools';
+import { SetVideoImg, MinutesFormat } from '../../utils/tools';
 import { cutVideoTime } from '../../config';
 // toast
 import emitter from '../../utils/events';
@@ -26,7 +26,7 @@ function Upload() {
    * @param {object} file    文件信息
    * @function readAsDataURL 读取指定的 Blob 或 File 对象
    * @param e                读取 Blob 或 File 对象成功后获取的返回值， result 属性将包含一个data:URL格式的字符串（base64编码）以表示所读取文件的内容
-   * @function setVideoImg              根据视频 data 信息，获取视频详情方法
+   * @function SetVideoImg              根据视频 data 信息，获取视频详情方法
    * @param {object} base64Img          视频封面+时长信息
    * @param {object} base64Img.src      视频指定时间（秒）处的截图（base64代码）
    * @param {object} base64Img.duration 当前视频时长（秒）
@@ -47,7 +47,7 @@ function Upload() {
       videoFile.onload = async (e: any) => {
         try {
           for (const iterator of cutVideoTime) {
-            const base64Img: any = await setVideoImg(e.target.result, iterator);
+            const base64Img: any = await SetVideoImg(e.target.result, iterator);
             setPosterList((posterList) => { return [...posterList, base64Img.src] });
             setDuration(base64Img.duration)
           }
@@ -116,7 +116,7 @@ function Upload() {
           />
         </div>
         <div className="chooseBox">
-          <p>视频时长：{minutesFormat(Number(duration))}</p>
+          <p>视频时长：{MinutesFormat(Number(duration))}</p>
         </div>
       </div>
       <div className="previewBox">

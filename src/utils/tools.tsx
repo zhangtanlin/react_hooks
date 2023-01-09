@@ -1,11 +1,4 @@
 /**
- * 导入
- * @requires cryptoCipheriv 使用 crypto 的 createCipheriv 加密方法
- * @requires encrypt_key 加密 key
- */
-import { cryptoAesEncrypt, cryptoAesDecrypt } from './encrypt_decrypt';
-
-/**
  * 根据 url 地址，获取地址栏指定参数的值
  * @param url  地址
  * @param name query参数key值
@@ -44,35 +37,37 @@ export const GetUrlQuery = (url: string, name: any) => {
  * @returns cb.duration 时长
  * @returns cb.src      指定时间的封面
  */
-export const setVideoImg = (url: any, time: number) => {
-  return new Promise(resolve => {
-    const video = document.createElement('video');
-    video.crossOrigin = 'anonymous';
-    const source = document.createElement('source');
-    source.src = url;
-    source.type = 'video/mp4';
-    video.appendChild(source);
-    video.currentTime = time;
-    video.addEventListener('loadeddata', () => {
-      const canvas: any = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas
-        .getContext('2d')
-        .drawImage(video, 0, 0, canvas.width, canvas.height);
-      const src = canvas.toDataURL('image/png');
-      const cb = {
-        duration: video.duration || 0,
-        src: src || ''
-      }
-      resolve(cb);
+export const SetVideoImg = (url: any, time: number) => {
+  try {
+    return new Promise(resolve => {
+      const video = document.createElement('video');
+      video.crossOrigin = 'anonymous';
+      const source = document.createElement('source');
+      source.src = url;
+      source.type = 'video/mp4';
+      video.appendChild(source);
+      video.currentTime = time;
+      video.addEventListener('loadeddata', () => {
+        const canvas: any = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas
+          .getContext('2d')
+          .drawImage(video, 0, 0, canvas.width, canvas.height);
+        const src = canvas.toDataURL('image/png');
+        const cb = {
+          duration: video.duration || 0,
+          src: src || ''
+        };
+        resolve(cb);
+      });
     });
-  }).catch(() => {
+  } catch {
     return {
       duration: 0,
       src: ''
     };
-  });
+  }
 };
 
 /**
@@ -82,7 +77,7 @@ export const setVideoImg = (url: any, time: number) => {
  * @description 用当前时间除以 3600 之后取余，再除以 60 获取分钟的值
  * @description 用当前时间除以 3600 之后取余，再除以 60 之后取余获取秒的值
  */
-export const minutesFormat = (minutes: number) => {
+export const MinutesFormat = (minutes: number) => {
   const hour = parseInt((minutes / 3600).toString(), 10);
   const minute = parseInt(((minutes % 3600) / 60).toString(), 10);
   const second = parseInt(((minutes % 3600) % 60).toString(), 10);
@@ -93,22 +88,41 @@ export const minutesFormat = (minutes: number) => {
 }
 
 /**
- * 加密请求参数
- * @param data      前端参数
- * @param newData   把对象转换成字符串
- * @param key       加密的 key （把字符串转换成 buffer ）
- * @param iv        通过 nodejs 自带的 crypto 模块获取一个长度为 16 的 bytes
- * @param cipheriv  使用 aes-256-cfb 加密数据
- * @param encrypted 加密之后的字符串
- * @param unixTime  获取当前时间的时间戳（秒）
+ * 生成唯一值字符串(根据数字和大小写字母)
+ * @param randomFlag 长度是否在最小长度和最大长度之间取一个随机值
+ * @param min        最小长度
+ * @param randomFlag 最大长度
  */
-export const encryptionParam = (data: any) => {
-  const tempData: string = JSON.stringify(data);
-  console.log('加密之前', tempData);
-  const encrypt = cryptoAesEncrypt(tempData);
-  console.log('加密之后', encrypt);
-  console.log('解密之前', );
-  const decrypt = cryptoAesDecrypt(encrypt);
-  console.log('解密之后', decrypt);
-  return '';
-}
+export const RandomId = (
+  randomFlag: boolean = true,
+  min: number = 15,
+  max: number = 30,
+): string => {
+  // 唯一字符串(需要返回的值)
+  let _str = "";
+  // 唯一值字符串的长度(默认长度为最小值,如果randomFlag为真,则随机获取最小值到最大值之间取随机值).
+  let range = min;
+  // 随机值列表
+  const arr = [
+    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
+    "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
+    "u", "v", "w", "x", "y", "z",
+    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+    "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+    "U", "V", "W", "X", "Y", "Z",
+  ];
+  // 如果为真,则获取最小长度到最大长度之间的随机值为唯一值字符串的长度.
+  if (randomFlag) {
+    const _random = Math.random();
+    range = Math.round(_random * (max - min)) + min;
+  }
+  // 拼接随机值
+  for (let i = 0; i < range; i++) {
+    const _random = Math.random();
+    // 获取随机值列表内的某个系列号
+    const _pos = Math.round(_random * (arr.length - 1));
+    _str += arr[_pos];
+  }
+  return _str;
+};

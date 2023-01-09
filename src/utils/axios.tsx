@@ -1,10 +1,13 @@
 /**
  * 导入
- * @requires encryptionParam 加密
+ * @requires encryptParam 加密
  */
 import axios from 'axios';
 import { api } from '../config';
-import { encryptionParam } from './tools';
+import Const from './const';
+import { cryptoAesEncrypt } from './encrypt_decrypt';
+import { localGet, localSet } from './storage';
+import { RandomId } from './tools';
 
 // 设置参数
 const instance = axios.create({
@@ -20,10 +23,40 @@ const instance = axios.create({
   // },
 });
 
+// 获取设备唯一值
+const getAuthId = () => {
+  let _oauth_id = localGet(Const.authId);
+  if (!_oauth_id) {
+    const _randomId = RandomId(false, 16);
+    _oauth_id = `${_randomId}_${new Date().getTime()}}`;
+    localSet(Const.authId, _oauth_id);
+  }
+  return _oauth_id;
+}
+
 // 请求之前
 instance.interceptors.request.use((config: any) => {
-  encryptionParam({ "data": "data" });
-  return config;
+  try {
+    const defaultParams = {
+      auth_id: getAuthId(),
+      version: Const.version,
+      ...config.data || {},
+    };
+    if (config?.data) {
+      config.data = JSON.stringify({
+        ...defaultParams,
+        ...config.data,
+      });
+    } else {
+      config.data = JSON.stringify({
+        ...defaultParams,
+      });
+    };
+    config.data = cryptoAesEncrypt(config.data);
+    return config;
+  } catch (error) {
+    console.log('请求参数加密失败');
+  }
 }, (error: any) => Promise.reject(error));
 
 /**
