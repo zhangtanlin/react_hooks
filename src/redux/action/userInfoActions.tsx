@@ -4,6 +4,4 @@ const setUserInfo = (obj: any) => ({
   payload: obj,
 });
 
-export default {
-  setUserInfo,
-};
+export default setUserInfo;

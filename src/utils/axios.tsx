@@ -20,11 +20,8 @@ const instance = axios.create({
   // },
 });
 
-/**
- * 请求之前
- */
+// 请求之前
 instance.interceptors.request.use((config: any) => {
-  console.log('con', config)
   encryptionParam({ "data": "data" });
   return config;
 }, (error: any) => Promise.reject(error));

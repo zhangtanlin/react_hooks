@@ -4,6 +4,4 @@ const setRandomNum = (num: number) => ({
   payload: num,
 });
 
-export default {
-  setRandomNum,
-};
+export default setRandomNum;

@@ -5,11 +5,8 @@ import ReactPaginate from 'react-paginate';
 import Select from '../../components/Select'
 import Popup from '../../components/Popup'
 import Player from './components/Player';
-/**
- * api 接口
- * @requires ApiGetList 请求列表
- */
 import {
+  // 请求列表
   ApiGetList,
 } from '../../api/home';
 
@@ -43,10 +40,11 @@ function Home() {
     { label: '10条每/页', value: 10 },
     { label: '15条每/页', value: 15 },
     { label: '20条每/页', value: 20 }
-  ])
-  const [values, setValues] = useState({
+  ]);
+  const [params, setParams] = useState({
     pageSize: 5,
     currentPage: 0,
+    isAll: false,
   });
   const [pageCount, setPageCount] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -54,41 +52,43 @@ function Home() {
   const [list, setList] = useState<ListItem[]>([]);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const [detailInfo, setDetailInfo] = useState<ListItem>();
+
+  // 请求数据
+  const getList = async () => {
+    const obj = {
+      pageSize: params.pageSize,
+      currentPage: Number(params.currentPage) + 1,
+    };
+    const res = await ApiGetList(obj);
+    if (res.status === 200) {
+      if (
+        Array.isArray(res.data.list) &&
+        res.data.list.length
+      ) {
+        let arr: ListItem[] = [];
+        res.data.list.map((element: ListItem) => {
+          const temp: ListItem = {
+            id: Number(element.id) || 0,
+            name: String(element.name) || '',
+            image: String(element.image) || ''
+          }
+          arr.push(temp);
+          return temp;
+        })
+        setList(arr);
+      }
+      setPageCount(Math.ceil(res.data.total / params.pageSize) || 0);
+      setTotal(Number(res.data.total) || 0);
+    }
+  }
+
   /**
    * 操作数据
    * @function getList 获取列表
    */
   useEffect(() => {
-    function getList() {
-      const obj = {
-        pageSize: values.pageSize,
-        currentPage: Number(values.currentPage) + 1,
-      };
-      ApiGetList(obj).then((res) => {
-        if (res.status === 200) {
-          if (
-            Array.isArray(res.data.list) &&
-            res.data.list.length
-          ) {
-            let arr: ListItem[] = [];
-            res.data.list.map((element: ListItem) => {
-              const temp: ListItem = {
-                id: Number(element.id) || 0,
-                name: String(element.name) || '',
-                image: String(element.image) || ''
-              }
-              arr.push(temp);
-              return temp;
-            })
-            setList(arr);
-          }
-          setPageCount(Math.ceil(res.data.total / values.pageSize) || 0);
-          setTotal(Number(res.data.total) || 0);
-        }
-      });
-    }
     getList();
-  }, [values]);
+  }, [params]);
   /**
    * 分页
    * @function onChangePage   react-paginate 插件改变页码事件
@@ -96,15 +96,19 @@ function Home() {
    * @function changePagesize 切换每页显示的条数
    */
   const onChangePage = (pageObj: any) => {
-    const obj = { ...values, currentPage: pageObj.selected };
-    setValues(obj);
+    const obj = { ...params, currentPage: pageObj.selected };
+    setParams(obj);
   };
   const onChangeInput = (event: any) => {
     setInputNum(event.target.value);
   };
   const changePagesize = (data: any) => {
-    const obj = { ...values, currentPage: 0, pageSize: Number(data.value) };
-    setValues(obj);
+    const obj = {
+      ...params,
+      currentPage: 0,
+      pageSize: Number(data.value),
+    };
+    setParams(obj);
   }
   /**
    * 获取当前行
@@ -123,9 +127,7 @@ function Home() {
   const showPopup = () => {
     setDetailVisible(!detailVisible);
   };
-  /**
-   * 弹出框内容
-   */
+  // 弹出框内容
   const content = () => {
     return <Player />
   }
@@ -196,7 +198,7 @@ function Home() {
             activeClassName="paginateActive"
             previousClassName="paginatePrevious"
             nextClassName="paginateNext"
-            forcePage={values.currentPage}
+            forcePage={params.currentPage}
           />
           <div className="paginateRight">
             跳转到第

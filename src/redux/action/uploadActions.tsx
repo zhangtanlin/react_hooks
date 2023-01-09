@@ -4,6 +4,4 @@ const setUpload = (obj: any) => ({
   payload: obj,
 });
 
-export default {
-  setUpload,
-};
+export default setUpload;
