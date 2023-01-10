@@ -3,7 +3,7 @@
  * @requires encryptParam 加密
  */
 import axios from 'axios';
-import { api } from '../config';
+import { apiGithub, } from '../config';
 import Const from './const';
 import { cryptoAesEncrypt } from './encrypt_decrypt';
 import { localGet, localSet } from './storage';
@@ -12,7 +12,7 @@ import { RandomId } from './tools';
 // 设置参数
 const instance = axios.create({
   timeout: 1000,
-  baseURL: api,
+  baseURL: apiGithub,
   // proxy: {
   //   host: '127.0.0.1',
   //   port: 9000,
@@ -67,3 +67,5 @@ instance.interceptors.response.use((response: any) => response, (error: any) => 
 
 // 导出
 export default instance;
+
+// 

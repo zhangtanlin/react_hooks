@@ -9,16 +9,16 @@ interface randomNumInterface {
   type: string,
   payload: number
 }
-const randomNumReducer = (
+const pageReducer = (
   state:number = 0,
   action: randomNumInterface,
 ) => {
   switch (action.type) {
-  case 'SET_RANDOMNUM':
-    return action.payload || 0;
-  default:
-    return state;
+    case 'SET_PAGE':
+      return action.payload || "";
+    default:
+      return state;
   }
 };
 
-export default randomNumReducer;
+export default pageReducer;
