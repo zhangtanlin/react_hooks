@@ -10,10 +10,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
  * @requires Calendar 日历
  */
 import routes from './constants/routes';
-import Sign from './pages/Sign';
+import Sign from './components/Sign';
 import Home from './pages/Home';
-import Upload from './pages/Upload';
-import Posts from './pages/Posts';
+import Upload from './components/Upload';
+import Posts from './components/Posts';
 import Toast from './components/Toast';
 
 function App() {

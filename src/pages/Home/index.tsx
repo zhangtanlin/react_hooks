@@ -53,40 +53,39 @@ function Home() {
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const [detailInfo, setDetailInfo] = useState<ListItem>();
 
-  // 请求数据
-  const getList = async () => {
-    const obj = {
-      pageSize: params.pageSize,
-      currentPage: Number(params.currentPage) + 1,
-    };
-    const res = await ApiGetList(obj);
-    if (res.status === 200) {
-      if (
-        Array.isArray(res.data.list) &&
-        res.data.list.length
-      ) {
-        let arr: ListItem[] = [];
-        res.data.list.map((element: ListItem) => {
-          const temp: ListItem = {
-            id: Number(element.id) || 0,
-            name: String(element.name) || '',
-            image: String(element.image) || ''
-          }
-          arr.push(temp);
-          return temp;
-        })
-        setList(arr);
-      }
-      setPageCount(Math.ceil(res.data.total / params.pageSize) || 0);
-      setTotal(Number(res.data.total) || 0);
-    }
-  }
-
   /**
    * 操作数据
    * @function getList 获取列表
    */
   useEffect(() => {
+    // 请求数据
+    const getList = async () => {
+      const obj = {
+        pageSize: params.pageSize,
+        currentPage: Number(params.currentPage) + 1,
+      };
+      const res = await ApiGetList(obj);
+      if (res.status === 200) {
+        if (
+          Array.isArray(res.data.list) &&
+          res.data.list.length
+        ) {
+          let arr: ListItem[] = [];
+          res.data.list.map((element: ListItem) => {
+            const temp: ListItem = {
+              id: Number(element.id) || 0,
+              name: String(element.name) || '',
+              image: String(element.image) || ''
+            }
+            arr.push(temp);
+            return temp;
+          })
+          setList(arr);
+        }
+        setPageCount(Math.ceil(res.data.total / params.pageSize) || 0);
+        setTotal(Number(res.data.total) || 0);
+      }
+    }
     getList();
   }, [params]);
   /**
