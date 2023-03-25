@@ -30,7 +30,7 @@
   },
   "scripts": {
     "注意": "这里的参数--openssl-legacy-provider是为了解决nodejs版本太高对openssl的不兼容(后期可以去掉)",
-    "start": "cross-env PORT=4000 react-scripts --openssl-legacy-provider start",
+    "start": "cross-env PORT=8000 react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

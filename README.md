@@ -8,7 +8,7 @@ create-react-app react_hooks --template typescript redux-typescript
 # 更改端口号第一步安装cross-env:
 npm install cross-env
 # 更改端口号第二步在packages的start命令内添加: 
-cross-env PORT=4000
+cross-env PORT=8000
 ```
 
 ## Available Scripts
